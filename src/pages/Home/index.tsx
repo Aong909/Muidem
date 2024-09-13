@@ -1,22 +1,21 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { IOneContent, Itiptap } from "../../util/interface";
 import ContentList from "../../component/ContentList/ContentList";
 import More from "../../component/More/More";
 import ContentBookmarkList from "../../component/ContentSaveList/ContentBookmarkList";
+import APIService from "../../service/APIs";
 
 const Home = () => {
   const [data, setData] = useState<Itiptap>();
   const [bookmarkList, setBookmarkList] = useState<Itiptap>();
-  console.log("saveList ===>", bookmarkList);
 
   const fetchData = async () => {
-    const data = await axios.get("http://localhost:3001/tiptap");
+    const data = await APIService.getAllData();
     setData(data.data);
   };
 
   const deleteData = async (id: string) => {
-    await axios.delete("http://localhost:3001/tiptap/" + id);
+    await APIService.deleteByID(id);
     const res = data?.filter((item) => item.id !== id);
     setData(res);
   };

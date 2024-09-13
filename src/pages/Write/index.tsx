@@ -1,22 +1,32 @@
-import axios from "axios";
 import { TextEditor } from "../../component/TextEditor/textEditor";
 
 import { useState } from "react";
 import { JSONContent } from "@tiptap/core";
 import { Link } from "react-router-dom";
+import APIService from "../../service/APIs";
 
 const Write = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState<JSONContent>();
 
   const saveContent = async () => {
-    await axios.post("http://localhost:3001/tiptap", {
+    // await axios.post("http://localhost:3001/tiptap", {
+    //   title: title,
+    //   content: content,
+    //   date: new Date().toString(),
+    //   like: 0,
+    //   comments: [],
+    // });
+
+    const param = {
       title: title,
       content: content,
       date: new Date().toString(),
       like: 0,
       comments: [],
-    });
+    };
+
+    APIService.postData(param);
 
     localStorage.removeItem("title");
     localStorage.removeItem("content");

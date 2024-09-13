@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import parse from "html-react-parser";
 
 import copy from "copy-to-clipboard";
@@ -34,6 +32,7 @@ import Drawer from "@mui/material/Drawer";
 
 import Comment from "../../component/Comment/Comment";
 import useAutosizeTextArea from "../../component/useAutosizeTextArea/useAutosizeTextArea";
+import APIService from "../../service/APIs";
 
 const Content = () => {
   const { id } = useParams();
@@ -51,7 +50,7 @@ const Content = () => {
   useAutosizeTextArea(textAreaRef.current, textarea);
 
   const callData = async () => {
-    const data = await axios.get(`http://localhost:3001/tiptap/${id}`);
+    const data = await APIService.getByID(id);
     setData(data.data);
   };
 
@@ -61,7 +60,7 @@ const Content = () => {
       like: arg,
     };
 
-    axios.put(`http://localhost:3001/tiptap/${id}`, param);
+    APIService.putByID(id, param);
   };
 
   const putComment = () => {
@@ -86,7 +85,7 @@ const Content = () => {
             },
           ],
     };
-    axios.put(`http://localhost:3001/tiptap/${id}`, param);
+    APIService.putByID(id, param);
   };
 
   useEffect(() => {
@@ -375,10 +374,15 @@ const Content = () => {
           },
         }}
       >
-        <div className="md:w-[380px] bg-white rounded-[30px] md:mt-0 mt-12 w-[100vw] h-full px-5">
+        <div className="md:w-[380px] overflow-scroll bg-white rounded-[30px] md:mt-0 mt-12 w-[100vw] h-full px-5">
           <div className="flex justify-between py-3">
             <h1>{`Responses (${commentList?.length})`}</h1>
-            <div onClick={() => toggleComment(false)}>X</div>
+            <div
+              onClick={() => toggleComment(false)}
+              className="hover:cursor-pointer"
+            >
+              X
+            </div>
           </div>
           <div className="h-fit shadow-md py-4 my-4">
             <div className="flex items-center mb-2 mx-4">

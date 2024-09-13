@@ -26,7 +26,10 @@ const Comment = (item: ICommentID) => {
         </div>
       </div>
       <div className="pb-2">{item.comment}</div>
-      <div onClick={handleClick} className="text-[12px] text-[#6b6b6b] pb-4">
+      <div
+        onClick={handleClick}
+        className="text-[12px] text-[#6b6b6b] pb-4 hover:cursor-pointer"
+      >
         {like ? (
           <>
             <Favorite className="mr-1 text-red-300" />

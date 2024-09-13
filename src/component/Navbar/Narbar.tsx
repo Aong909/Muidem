@@ -7,7 +7,7 @@ import {
 } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Itiptap } from "../../util/interface";
-import axios from "axios";
+import APIService from "../../service/APIs";
 
 const Navbar = () => {
   const [keyword, setKeyword] = useState("");
@@ -16,7 +16,7 @@ const Navbar = () => {
   const [openSearchRes, setOpenSearchRes] = useState(false);
 
   const fetchData = async () => {
-    const data = await axios.get("http://localhost:3001/tiptap");
+    const data = await APIService.getAllData();
     setData(data.data);
   };
 
@@ -88,7 +88,7 @@ const Navbar = () => {
         </div>
       </div>
       {openSearchRes && filterData?.length !== 0 && (
-        <div className="bg-white absolute left-[275px] w-[280px] pt-2.5 px-2.5 rounded-sm shadow-md">
+        <div className="bg-white absolute left-[170px] w-[280px] pt-2.5 px-2.5 rounded-sm shadow-md">
           <div className=" border-b-2 border-[#6b6b6b] mb-2 text-[20px] text-[#6b6b6b]">
             title
           </div>
