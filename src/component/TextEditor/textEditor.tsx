@@ -105,7 +105,9 @@ export function TextEditor(func: Ifunc) {
 
   useEffect(() => {
     if (title && editorTitle) {
-      editorTitle.commands.setContent(title);
+      editorTitle.commands.setContent(title, false, {
+        preserveWhitespace: "full",
+      });
     }
   }, [title, editorTitle]);
 
