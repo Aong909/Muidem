@@ -97,7 +97,9 @@ export function TextEditor(func: Ifunc) {
 
   useEffect(() => {
     if (content && editor) {
-      editor.commands.setContent(content);
+      editor.commands.setContent(content, false, {
+        preserveWhitespace: "full",
+      });
     }
   }, [editor, content]);
 
