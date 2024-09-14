@@ -67,6 +67,7 @@ export function TextEditor(func: Ifunc) {
   const editorTitle = useEditor({
     extensions: [
       CustomDocument,
+      Text,
       StarterKit.configure({
         document: false,
       }),
@@ -97,7 +98,9 @@ export function TextEditor(func: Ifunc) {
 
   useEffect(() => {
     if (content && editor) {
-      editor.commands.setContent(content);
+      editor.commands.setContent(content, false, {
+        preserveWhitespace: "full",
+      });
     }
   }, [editor, content]);
 
